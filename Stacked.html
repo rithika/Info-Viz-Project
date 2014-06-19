@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head lang=en>
+<meta charset="utf-8">
+<title>D3 Talk: Sample Simple Bar Chart Example</title>
+<style>
+
+svg {
+  background: #ddd;
+  font: 10px sans-serif;
+}
+
+<style>
+	
+	.axis path .axis line{
+		fill: none;
+		stroke:black;
+		shape-rendering: crispEdges;
+	}
+.axis .tick {
+	   stroke: red;
+	   opacity: 0.5;
+	}
+.stacked .bar {
+		
+		stroke: none;
+	}
+
+	.grid {
+	fill: none;
+		stroke:black;
+		shape-rendering: crispEdges;
+	}
+	
+</style>
+</head>
+
+
+<body>
+<h2>Individual Algorithm Coverage</h2>
+<FORM>
+<INPUT Type="BUTTON" VALUE="Home Page" ONCLICK="window.location.href='http://localhost/info%20viz%20project/First.html'"> 
+</FORM>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="Stacked.js"></script>
+<script>
+
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 480 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
+
+/* defining the	charts with different inputs to width, height, Xlabel(label for X axis), Ylabel(label for Y axis),label(the number value for each bar)
+grid(gridlines)*/
+var chart1 = d3.cloudshapes.stacked().width(width).height(height).Xlabel(1).Ylabel(1).grid("lcovns");
+var chart2 = d3.cloudshapes.stacked().width(width).height(height).Xlabel(1).Ylabel(1).grid("lcovs");
+var chart3 = d3.cloudshapes.stacked().width(width).height(height).Xlabel(1).Ylabel(1).grid("bcovns");
+var chart4 = d3.cloudshapes.stacked().width(width).height(height).Xlabel(1).Ylabel(1).grid("bcovs");
+var chart5 = d3.cloudshapes.stacked().width(width).height(height).Xlabel(1).Ylabel(1).grid("fcovns");
+var chart6 = d3.cloudshapes.stacked().width(width).height(height).Xlabel(1).Ylabel(1).grid("fcovs");
+
+d3.csv("ts_lcov.csv", function(error, data) {// reading in the data
+var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "ts_no"; });	// to get the column names for different age groups
+data.forEach(function(d) {
+var y0=0;
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name],y0:y0,y1:y0 += +d[name]}; }); // to get the number of people for different age groups
+	d.total = d.ages[d.ages.length - 1].y1; //to get the total number of people present in each state.
+  });
+  
+  
+d3.select("body")
+.datum(data)
+.call(chart1);
+	
+});
+d3.csv("ts_lcovs.csv", function(error, data) {// reading in the data
+var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "ts_no"; });	// to get the column names for different age groups
+data.forEach(function(d) {
+var y0=0;
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name],y0:y0,y1:y0 += +d[name]}; }); // to get the number of people for different age groups
+	d.total = d.ages[d.ages.length - 1].y1; //to get the total number of people present in each state.
+  });
+  
+  d3.select("body")
+.datum(data)
+.call(chart2);
+	
+});
+
+d3.csv("ts_bcovns.csv", function(error, data) {// reading in the data
+var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "ts_no"; });	// to get the column names for different age groups
+data.forEach(function(d) {
+var y0=0;
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name],y0:y0,y1:y0 += +d[name]}; }); // to get the number of people for different age groups
+	d.total = d.ages[d.ages.length - 1].y1; //to get the total number of people present in each state.
+  });
+  
+d3.select("body")
+.datum(data)
+.call(chart3);
+	
+});
+d3.csv("ts_bcovs.csv", function(error, data) {// reading in the data
+var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "ts_no"; });	// to get the column names for different age groups
+data.forEach(function(d) {
+var y0=0;
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name],y0:y0,y1:y0 += +d[name]}; }); // to get the number of people for different age groups
+	d.total = d.ages[d.ages.length - 1].y1; //to get the total number of people present in each state.
+  });
+  
+d3.select("body")
+.datum(data)
+.call(chart4);
+	
+});
+d3.csv("ts_fcovns.csv", function(error, data) {// reading in the data
+var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "ts_no"; });	// to get the column names for different age groups
+data.forEach(function(d) {
+var y0=0;
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name],y0:y0,y1:y0 += +d[name]}; }); // to get the number of people for different age groups
+	d.total = d.ages[d.ages.length - 1].y1; //to get the total number of people present in each state.
+  });
+  
+d3.select("body")
+.datum(data)
+.call(chart5);
+	
+});
+d3.csv("ts_fcovs.csv", function(error, data) {// reading in the data
+var ageNames = d3.keys(data[0]).filter(function(key) { return key !== "ts_no"; });	// to get the column names for different age groups
+data.forEach(function(d) {
+var y0=0;
+    d.ages = ageNames.map(function(name) { return {name: name, value: +d[name],y0:y0,y1:y0 += +d[name]}; }); // to get the number of people for different age groups
+	d.total = d.ages[d.ages.length - 1].y1; //to get the total number of people present in each state.
+  });
+  
+d3.select("body")
+.datum(data)
+.call(chart6);
+	
+});
+</script>
+
+</body>
+</html>

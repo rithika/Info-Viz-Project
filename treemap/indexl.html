@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head></head>
+
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+	<style>
+	.node {
+  border: solid 1px #e6e5e5;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 4px;
+  z-index:10;
+}
+
+.tooltip {
+  position: absolute;
+  border:1px solid;
+  margin:10px;
+  padding: 6px;
+  opacity: 0.9;
+  z-index: 1000;
+}
+
+#sidebar {
+  float: right;
+  width: 18%;
+}
+#sidebar > div {
+  margin-bottom: 1em;
+}
+	</style>
+	<script src="TreeMap.js"></script>
+	<body>
+		<h1>Line coverage for both swarm and noswarm</h1>
+		<FORM>
+<INPUT Type="BUTTON" VALUE="Home Page" ONCLICK="window.location.href='http://localhost/info%20viz%20project/First.html'"> 
+</FORM>
+		<div id="sidebar">
+				<p font size=10> 
+					<h3>Instructions</h3>
+			In the diagram, every rectangle represents a file in the source tree. The size that the rlines were checked for coverage, while the color represents what percentage of the file is covered by various test suites. Hover over any rectangle to see details about how many lines in both no swarm and swarm algorithms are covered in that file.
+			<h3>Scale: </h3>
+			The color scale varies from red to blue with red depicting least coverage and blue depicting highest coverage.
+		</p>
+</div>
+		<div id="treemap"> </div>
+
+		<script>
+			var chart3 = treeMap().width(960).height(500);
+
+			d3.json("flarel.json", function(error, root){
+				d3.select("#treemap")
+					.datum(root)
+					.call(chart3)
+			});
+		</script>
+		
+	</body>
+</html>

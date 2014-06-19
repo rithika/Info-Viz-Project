@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+    <style>
+      rect.bordered {
+        stroke: #E6E6E6;
+        stroke-width:2px;   
+      }
+
+      text.mono {
+        font-size: 9pt;
+        font-family: Consolas, courier;
+        fill: #aaa;
+      }
+
+      text.axis-workweek {
+        fill: #000;
+      }
+
+      text.axis-worktime {
+        fill: #000;
+      }
+    </style>
+    <script src="http://d3js.org/d3.v3.js"></script>
+	<script src="heat_map_lcov.js"></script>
+	
+  </head>
+  <body>
+    <h2>Line coverage test suite wise</h2>
+    <FORM>
+<INPUT Type="BUTTON" VALUE="Home Page" ONCLICK="window.location.href='http://localhost/info%20viz%20project/First.html'" style="float:right"> 
+</FORM>
+    <div id="chart"></div>
+ 
+    <script type="text/javascript">
+      var margin = { top: 20, right: 0, bottom: 20, left: 30 },
+          width = 5300 - margin.left - margin.right,
+		  width1 = 960 - margin.left - margin.right,
+          height = 300 - margin.top - margin.bottom,
+          gridSize = Math.floor(width1 / (48*6))+8,
+          legendElementWidth = gridSize*2;
+		  
+var chart1 = d3.cloudshapes1.heat_lcov().width(width).height(height);          
+//var chart2 = d3.cloudshapes.heat_bcov().width(width).height(height);
+ 
+
+d3.csv("lcovns2.csv",function(error, data) {
+	  
+	  d3.select("body")
+.datum(data)
+.call(chart1);
+
+      });
+	  d3.csv("lcovs2.csv",function(error, data) {
+	  
+	  d3.select("body")
+.datum(data)
+.call(chart1);
+
+      });
+
+
+
+    </script>
+    
+  </body>
+</html>
